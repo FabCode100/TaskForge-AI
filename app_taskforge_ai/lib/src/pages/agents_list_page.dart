@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:provider/provider.dart';
 
 import '../services/auth_service.dart';
+import 'agent_detail_page.dart';
 
 class AgentsListPage extends StatefulWidget {
   const AgentsListPage({Key? key}) : super(key: key);
@@ -70,11 +71,14 @@ class _AgentsListPageState extends State<AgentsListPage> {
                       itemCount: agents.length == 0 ? 6 : agents.length,
                       itemBuilder: (context, index) {
                         final a = agents.isEmpty
-                            ? {"name": "Demo Agent", "description": "Smart automation agent"}
-                            : agents[index];
+                          ? {"id": 1, "name": "Demo Agent", "description": "Smart automation agent"}
+                          : agents[index];
                         return Card(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => AgentDetailPage(agent: a)));
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Column(
@@ -87,7 +91,12 @@ class _AgentsListPageState extends State<AgentsListPage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      ElevatedButton(onPressed: () {}, child: const Text('Run'))
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (_) => AgentDetailPage(agent: a)));
+                                          },
+                                          child: const Text('Run'))
                                     ],
                                   )
                                 ],

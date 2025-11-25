@@ -8,3 +8,6 @@ python-multipart
 aiofiles
 pytest
 httpx
+pydantic[email]
+pydantic-settings
+huggingface-hub
